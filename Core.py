@@ -13,13 +13,18 @@ def main(wish):
     try:
         #  load information from json-file
         all_data = dict()
-        all_data = Json.reading_from_the_file()
+        all_data, error_code = Json.reading_from_the_data_file()
     except:
         error_code = 2
 
     if error_code == 0:
-        error_code = Logic.core(all_data, wish)
+        result, error_code = Logic.core(all_data, wish)
 
+    # if answer wasn't given...
+    if result == False:
+
+        # write wish to the list for future answers
+        error_code = Json.writing_to_the_data_file(wish)
 
 if __name__ == '__main__':
 
