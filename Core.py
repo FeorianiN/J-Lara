@@ -5,6 +5,7 @@ import Json
 import Logic
 import Output
 
+
 def main(wish):
 
     #  variable for checking type of errors
@@ -34,8 +35,10 @@ def main(wish):
         # write wish to the list for future answers
         error_code = Json.writing_to_the_data_file(wish)
 
+    return error_code
+
 
 if __name__ == '__main__':
 
-    wish = ""
+    wish = "Tell me a story"
     main(wish)

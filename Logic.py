@@ -78,11 +78,32 @@ def frequency_proccesser(frequency_of_coincidences, len_of_the_json_string):
     result = False
     accuracy = []
 
+    #  calculating accuracy for every data-line
+    for i in range(len(list(frequency_of_coincidences))):
+        temp_acc = 0
+        temp_acc = frequency_of_coincidences[i] / len_of_the_json_string[i]
+        accuracy.append(temp_acc)
+
+    for j in range(len(list(accuracy))):
+
+        #  bottom limit for accuracy of the answer(limit * 100%)
+        limit = 0.1
+        if accuracy[j] > limit:
+            result = True
+
     return accuracy, result, error_code
 
 
 def accuracy_proccesser(accuracy):
 
     error_code = 0
+
+    #  searching for an answer with max accuracy
+    max_accuracy_number = 0
+    for i in range(len(list(accuracy))):
+        if (accuracy[i] > 0) and (accuracy[i] > accuracy[max_accuracy_number]):
+            max_accuracy_number = i
+
+    number_of_the_best_answer = max_accuracy_number
 
     return number_of_the_best_answer, error_code

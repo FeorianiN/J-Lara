@@ -1,13 +1,16 @@
 {
   "JL": [
     {
-      "wish": "",
-      "answer": ""
+      "wish": "Show me this world",
+      "answer": "So, just go for a walk"
     }
   ],
   "Future": [
     {
-      "wish": ""
+      "wish": "Are you mocking me?"
+    },
+    {
+      "wish": "Please, tell a story"
     }
   ]
 }
