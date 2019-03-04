@@ -20,11 +20,20 @@ def main(wish):
     if error_code == 0:
         result, error_code = Logic.core(all_data, wish)
 
+    if result == True:
+
+        # show answer to user
+        Output.positive_output()
+
     # if answer wasn't given...
-    if result == False:
+    elif result == False:
+
+        # show sorry-message to user
+        Output.negative_output()
 
         # write wish to the list for future answers
         error_code = Json.writing_to_the_data_file(wish)
+
 
 if __name__ == '__main__':
 

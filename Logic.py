@@ -4,4 +4,85 @@ import re
 
 def core(all_data, wish):
 
+    error_code = 0
+    number_of_answer = 0
+    accuracy = []
+    result = False
+
+    #  parser of the wish and data, which return such processed data as:
+    #  frequency of including wish-words in data-words
+    #  and len of the every data-string for calculating accuracy of every result
+    frequency_of_coincidences, len_of_the_json_string, error_code = data_parser(all_data, wish)
+
+    if error_code == 0:
+
+        #  calculating accuracy-data in case of
+        #  wish-words in data-words frequency of includings
+        accuracy, result, error_code = frequency_proccesser(frequency_of_coincidences, len_of_the_json_string)
+
+        if error_code == 0 and result == True:
+
+            #  searching for the best answer for the wish
+            number_of_the_best_answer, error_code = accuracy_proccesser(accuracy)
+
     return result, error_code
+
+
+def data_parser(all_data, wish):
+
+    error_code = 0
+
+    #  wish-string parsing to words
+    help_string = wish.lower()
+    words_in_wish = help_string.split()
+
+    #  variables for check, what is the frequency
+    #  of including wish-words in data-words
+    frequency_of_coincidences = []
+    len_of_the_json_string = []
+    temp_frequency = 0
+    temp_len = 0
+
+    try:
+        #  start to finding coincidences in data...
+
+        #  data-string parsing to words
+        for i in range(len(list(all_data["JL"]))):
+            processing_string = all_data["JL"][i]["wish"].lower()
+            processing_words = processing_string.split()
+
+            #  searching in current data-string...
+            for j in range(len(list(processing_words))):
+                temp_len = temp_len + 1
+
+                #  searching in current data-string wish-words
+                for k in range(len(list(words_in_wish))):
+                    if processing_words[j] == words_in_wish[k]:
+                        temp_frequency = temp_frequency + 1
+
+            #  save temp frequency-info and len-info
+            frequency_of_coincidences.append(temp_frequency)
+            len_of_the_json_string.append(temp_len)
+
+            temp_frequency = 0
+            temp_len = 0
+    except:
+        error_code = 3
+
+    return frequency_of_coincidences, len_of_the_json_string, error_code
+
+
+def frequency_proccesser(frequency_of_coincidences, len_of_the_json_string):
+
+    error_code = 0
+    result = False
+    accuracy = []
+
+    return accuracy, result, error_code
+
+
+def accuracy_proccesser(accuracy):
+
+    error_code = 0
+
+    return number_of_the_best_answer, error_code
