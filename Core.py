@@ -1,6 +1,7 @@
 #!/usr/bin/python3.5
 # -*- coding: utf-8 -*-
 
+import Tk
 import Json
 import Logic
 import Output
@@ -34,6 +35,8 @@ def main(wish):
 
         # write wish to the list for future answers
         error_code = Json.writing_to_the_data_file(wish)
+
+    Tk.main()
 
     return error_code
 
