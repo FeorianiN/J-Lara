@@ -4,10 +4,11 @@ import re
 
 def core(all_data, wish):
 
-    error_code = 0
     number_of_answer = 0
-    accuracy = []
+    error_code = 0
     result = False
+    accuracy = []
+    answer = ""
 
     #  parser of the wish and data, which return such processed data as:
     #  frequency of including wish-words in data-words
@@ -17,15 +18,21 @@ def core(all_data, wish):
     if error_code == 0:
 
         #  calculating accuracy-data in case of
-        #  wish-words in data-words frequency of includings
-        accuracy, result, error_code = frequency_proccesser(frequency_of_coincidences, len_of_the_json_string)
+        #  wish-words in data-words frequency of includes
+        accuracy, result, error_code = frequency_processor(frequency_of_coincidences, len_of_the_json_string)
 
         if error_code == 0 and result == True:
 
             #  searching for the best answer for the wish
-            number_of_the_best_answer, error_code = accuracy_proccesser(accuracy)
+            number_of_the_best_answer, error_code = accuracy_processor(accuracy)
 
-    return result, error_code
+            #  searching for the answer on [number_of_the_best_answer] position in all information
+            if error_code == 0:
+                answer = all_data[number_of_the_best_answer]
+            else:
+                error_code = 3
+
+    return answer, result, error_code
 
 
 def data_parser(all_data, wish):
@@ -72,7 +79,7 @@ def data_parser(all_data, wish):
     return frequency_of_coincidences, len_of_the_json_string, error_code
 
 
-def frequency_proccesser(frequency_of_coincidences, len_of_the_json_string):
+def frequency_processor(frequency_of_coincidences, len_of_the_json_string):
 
     error_code = 0
     result = False
@@ -94,7 +101,7 @@ def frequency_proccesser(frequency_of_coincidences, len_of_the_json_string):
     return accuracy, result, error_code
 
 
-def accuracy_proccesser(accuracy):
+def accuracy_processor(accuracy):
 
     error_code = 0
 

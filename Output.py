@@ -1,7 +1,6 @@
-import os
 
 
-def positive_output():
+def positive_output(answer):
     return 0
 
 

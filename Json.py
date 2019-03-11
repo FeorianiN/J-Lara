@@ -12,7 +12,7 @@ def configuration_loading():
 
     #  load info from config-file
     try:
-        f = open('Config.md')
+        f = open('config.md', 'r')
         line = f.readlines()
 
         #  parse file
@@ -30,6 +30,8 @@ def reading_from_the_data_file():
 
     error_code = 0
 
+    data_from_the_file = dict()
+
     #  load path to the data-file from config-info
     disposition_of_data_file, error_code = configuration_loading()
 
@@ -39,7 +41,6 @@ def reading_from_the_data_file():
             data_from_the_file = json.load(open(disposition_of_data_file))
         except:
             error_code = 2
-            data_from_the_file = dict()
 
     return data_from_the_file, error_code
 
