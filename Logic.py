@@ -28,7 +28,7 @@ def core(all_data, wish):
 
             #  searching for the answer on [number_of_the_best_answer] position in all information
             if error_code == 0:
-                answer = all_data[number_of_the_best_answer]
+                answer = all_data["JL"][number_of_the_best_answer]["answer"]
             else:
                 error_code = 3
 
