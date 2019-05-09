@@ -3,6 +3,29 @@ import re
 import json
 
 
+backup_data = {
+    "JL": [
+        {
+            "wish": "Show me this world",
+            "answer": "So, just go for a walk"
+        },
+        {
+            "wish": "Switch off the computer",
+            "answer": "Ok, bye"
+        },
+        {
+            "wish": "Restart the computer",
+            "answer": "Ok, see you soon"
+        },
+        {
+            "wish": "Open C disk",
+            "answer": "Ok, here it is"
+        }
+    ],
+    "Future": []
+}
+
+
 def configuration_loading():
     #  configuration-info about location of data-files
 
@@ -12,8 +35,10 @@ def configuration_loading():
 
     #  load info from config-file
     try:
-        f = open('config.md', 'r')
+        f = open('Config.md', 'r')
         line = f.readlines()
+        #with open('config.md', 'r') as f:
+        #    json.dump(line, f, indent=2, ensure_ascii=False)
 
         #  parse file
         line[0] = re.sub('\n', '', line[0])
@@ -41,6 +66,10 @@ def reading_from_the_data_file():
             data_from_the_file = json.load(open(disposition_of_data_file))
         except:
             error_code = 2
+
+    elif error_code == 4:
+        data_from_the_file = backup_data
+        error_code = 0
 
     return data_from_the_file, error_code
 
