@@ -1,10 +1,13 @@
-#!/usr/bin/python3.5
+#!/usr/bin/python3.7
 # -*- coding: utf-8 -*-
 
+import os
 import Tk
 import Json
 import Logic
 import Output
+import platform
+import subprocess
 
 
 def main(wish):
@@ -27,8 +30,21 @@ def main(wish):
 
     if result == True:
 
-        # show answer to user
-        Output.positive_output(answer)
+        # management command: switch off
+        if answer == "Ok, bye":
+            subprocess.call(["shutdown", "/s"])
+
+        # management command: restart
+        elif answer == "Ok, see you soon":
+            subprocess.call(["shutdown", "/r"])
+
+        elif answer == "Ok, here it is":
+            if platform.system() == "Windows":
+                os.startfile("C:")
+
+        else:
+            # show answer to user
+            Output.positive_output(answer)
 
     # if answer wasn't given...
     elif result == False:
