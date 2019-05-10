@@ -41,6 +41,10 @@ def main(wish):
         elif answer == "Ok, here it is":
             if platform.system() == "Windows":
                 os.startfile("C:")
+            elif platform.system() == "Darwin":
+                subprocess.Popen(["open", "C:"])
+            else:
+                subprocess.Popen(["xdg-open", "C:"])
 
         else:
             # show answer to user
